@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+        
+
+   <bean id="ltime" class="java.time.LocalTime" factory-method="now"/>
+   <bean id="ldate" class="java.time.LocalDate" factory-method="now"/>
+   
+   <bean id="ltime1" class="java.time.LocalTime" factory-method="of">
+     <constructor-arg value="20"/> <!-- Valid hour value -->
+     <constructor-arg value="20"/> <!-- Valid minute value -->
+   </bean>
+   
+<bean id="ldate1" class="java.time.LocalDate" factory-method="of">
+  <constructor-arg value="2020"/> <!-- Year value -->
+  <constructor-arg value="2"/> <!-- Valid month value (2 for February) -->
+  <constructor-arg value="20"/> <!-- Day value -->
+</bean>
+
+   
+   <!-- Target spring bean cfg -->
+   <bean id="wmg" class="com.nt.sbeans.WishMessageGenerator" >
+   <property name="lt" ref="ltime"/>
+   <property name="ld" ref="ldate"/>
+   <constructor-arg name="lt" ref="ltime1"/>
+   <constructor-arg name="ld" ref="ldate1"/>
+   </bean>
+   </beans>    
